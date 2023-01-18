@@ -1,36 +1,35 @@
-	function ids(id) {
-		
-	
-		sessionStorage.setItem("id", id);
-		  if (window.location.hash == "#en") {
-		      	window.location.href = "duyurular-detay.html#en";
-		  }
-		  else{
-		      	window.location.href = "duyurular-detay.html";
-		  }
-	
-			
+function ids(id) {
+
+
+    sessionStorage.setItem("id", id);
+    if (window.location.hash == "#en") {
+        window.location.href = "duyurular-detay.html#en";
+    } else {
+        window.location.href = "duyurular-detay.html";
+    }
+
+
 }
 
-  if (window.location.hash == "#en") {
-      
-      var listele=document.getElementById("blogs")
-fetch("https://api-karmer.aybu.edu.tr:8080/career-service/public/announcement-api/" ,{
-	headers:{
-		'Accept-Language': 'en'
-	}
-})
-.then(response=>response.json())
-.then(data=>{
+if (window.location.hash == "#en") {
 
-	let x = data.data
-	
-	x.forEach(element => {
+    var listele = document.getElementById("blogs")
+    fetch("https://api-karmer.aybu.edu.tr:8080/career-service/public/announcement-api/", {
+        headers: {
+            'Accept-Language': 'en'
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
 
-        {
-					
-			
-            listele.innerHTML+=`<div class="col-lg-4 mb-30">
+            let x = data.data
+
+            x.forEach(element => {
+
+                {
+
+
+                    listele.innerHTML += `<div class="col-lg-4 mb-30">
                                     <div class="blog-item">
                                         <div  style=" text-align: center;" class="blog-img">
                                             <a onclick="ids('${element.uuid}');"><img  class="mobile-img-res" style="cursor: pointer;" src="${element.image}" alt="Aybü Kar-Mer - Aybü Kariyer Planlaması ve Yönetimi Uygulama ve Araştırma Merkezi"></a>
@@ -62,33 +61,31 @@ fetch("https://api-karmer.aybu.edu.tr:8080/career-service/public/announcement-ap
                                         </div>
                                     </div>
                                 </div>`
-						 
-						
 
-			
+
+                }
+
+            });
+        });
+} else {
+
+    var listele = document.getElementById("blogs")
+    fetch("https://api-karmer.aybu.edu.tr:8080/career-service/public/announcement-api/", {
+        headers: {
+            'Accept-Language': 'tr'
         }
-        
-    });
-});
-  }else{
-      
-      var listele=document.getElementById("blogs")
-fetch("https://api-karmer.aybu.edu.tr:8080/career-service/public/announcement-api/" ,{
-	headers:{
-		'Accept-Language': 'tr'
-	}
-})
-.then(response=>response.json())
-.then(data=>{
+    })
+        .then(response => response.json())
+        .then(data => {
 
-	let x = data.data
-	
-	x.forEach(element => {
+            let x = data.data
 
-        {
-					
-			
-            listele.innerHTML+=`<div class="col-lg-4 mb-30">
+            x.forEach(element => {
+
+                {
+
+
+                    listele.innerHTML += `<div class="col-lg-4 mb-30">
                                     <div class="blog-item">
                                         <div  style=" text-align: center;" class="blog-img">
                                             <a onclick="ids('${element.uuid}');"><img  class="mobile-img-res" style="cursor: pointer;" src="${element.image}" alt="Aybü Kar-Mer - Aybü Kariyer Planlaması ve Yönetimi Uygulama ve Araştırma Merkezi"></a>
@@ -120,16 +117,14 @@ fetch("https://api-karmer.aybu.edu.tr:8080/career-service/public/announcement-ap
                                         </div>
                                     </div>
                                 </div>`
-						 
-						
 
-			
-        }
-        
-    });
-});
-      
-  }
+
+                }
+
+            });
+        });
+
+}
   
 
 
