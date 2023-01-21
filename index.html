@@ -239,9 +239,11 @@
 
     </div>
 
+
     <div class="container">
 
-        <div class="sec-title mt-30 mb-15">
+        <div class="row mb-50">
+        <div class="sec-title mt-30 mb-15 mt-15">
             <h2>Haberler</h2>
 
         </div>
@@ -253,6 +255,8 @@
             </div>
 
         </div>
+        </div>
+
 
 
         <!--<div id="carouselExampleControls2" class="carousel slide" data-ride="carousel">
@@ -518,9 +522,19 @@
             transform: translateY(-50%);
         }
 
+        .slick-prev:before, .slick-next:before{
+            color:#13c0d7;
+        }
+
         @media (min-width: 768px) {
             .card img {
                 height: 11em;
+            }
+        }
+
+        @media (max-width: 768px){
+            .mobilex {
+             width: 100%!important;
             }
         }
     </style>
@@ -675,7 +689,7 @@
                         <div class="card px-3 pt-3 " style="min-height: 140px;">
                             <div class="card-body p-0 d-flex flex-column  justify-content-around">
                                 <div class="card-title m-0 p-0">
-                                    <h5 class="m-0" style="color: #21a7d0;"> <a href="#"
+                                    <h5 class="m-0" style="color: #21a7d0;"> <a href="/portal"
                                             style="color: #21a7d0;">${element.title}</a>
                                     </h5>
                                 </div>
@@ -704,17 +718,6 @@
 
                 });
         }
-
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
 
         async function getAnnouncementHome() {
             let lang = 'tr';
@@ -760,7 +763,7 @@
                                                   <div class="col-md-8">
                                                       <div class="card-body">
                                                           <h5 class="card-title"><a href="javascript:announcementDetail('${element.uuid}')" >${element.title}</a></h5>
-                                                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                         <p class="card-text"><small class="text-muted"></small></p>
                                                         </div>
                                                    </div>
                                                 </div>
@@ -773,7 +776,6 @@
 
                 });
         }
-
 
         function getHomePage() {
             let lang = 'tr';
@@ -839,7 +841,6 @@
 
         }
 
-
         async function getEvent() {
             let lang = 'tr';
 
@@ -883,8 +884,8 @@
                                                   </div>
                                                   <div class="col-md-8">
                                                       <div class="card-body">
-                                                          <h5 class="card-title">${element.title}</h5>
-                                                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                                          <h5 class="card-title"><a href="javascript:eventDetail('${element.uuid}')" >${element.title}</a></h5>
+                                                         <p class="card-text"><small class="text-muted"></small></p>
                                                         </div>
                                                    </div>
                                                 </div>
@@ -912,6 +913,34 @@
         }
 
 
+        function eventDetail(id) {
+
+            sessionStorage.setItem("id", id);
+            if (window.location.hash == "#en") {
+                window.location.href = "egitimler-detay.html#en";
+            } else {
+                window.location.href = "egitimler-detay.html";
+            }
+
+
+        }
+
+
+
+        function blogDetail(id) {
+
+
+            sessionStorage.setItem("id", id);
+            if (window.location.hash == "#en") {
+                window.location.href = "blog-detay.html#en";
+            } else {
+                window.location.href = "blog-detay.html";
+            }
+
+
+        }
+
+
         async function getHomePageNews() {
             let lang = 'tr';
 
@@ -923,7 +952,7 @@
             }
 
 
-            fetch("https://api-karmer.aybu.edu.tr:8080/career-service/public/generic-blog-api/?blog_type=Blog&count=6&isHomePage=1", {
+            fetch("https://api-karmer.aybu.edu.tr:8080/career-service/public/generic-blog-api/?blog_type=Blog&count=6&isHomePage=0", {
                 headers: {
                     'Accept-Language': lang
                 }
@@ -1010,27 +1039,66 @@
                             adaptiveHeight: true
                           });
                         }
-                        
+
+
+
+
+
+                        <div class="blog-item">
+                                        <div  style=" text-align: center;" class="blog-img">
+                                            <a onclick="ids('${element.uuid}');"><img  class="mobile-img-res" style="cursor: pointer;" src="${element.image}" alt="Aybü Kar-Mer - Aybü Kariyer Planlaması ve Yönetimi Uygulama ve Araştırma Merkezi"></a>
+                                        </div>
+                                        <div class="blog-content">
+                                            <h3 class="blog-title"><a onclick="ids('${element.uuid}');">${element.title}</a></h3>
+                                            <div class="blog-meta">
+                                                <ul class="btm-cate">
+                                                    <li>
+                                                        <div class="blog-date">
+                                                            <i class="fa fa-calendar-check-o"></i> ${element.creationDate}
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="tag-line">
+                                                            <i class="fa fa-book"></i>
+                                                            <a href="#">${element.type.label}</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="blog-desc">
+                                                ${element.article} ...
+                                            </div>
+                                            <div class="blog-button">
+                                                <a class="blog-btn" onclick="ids('${element.uuid}');">Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
                         
                         
                         
                          */
 
 
+
+
                         if (counter % 3 === 0) {
                             if (counter === 0) {
-                                carouselHtml += '<div class="x"> <div class="cards-wrapper"><div class="card"><img src="https://aybu.edu.tr/GetFile?id=Upload\2c9d5947-242a-4843-991b-e1fae77b5041.jpg" class="card-img-top" alt="..."><div class="card-body"> <h5 class="card-title">' + element.title + '</h5><p class="card-text"></p><a href="#" class="btn btn-primary">Git</a></div></div>';
+                                carouselHtml += '<div class="x"> <div class="cards-wrapper"><div class="card mobilex" style="width: 33%"><img style="height:17em!important;" src="' + element.image + '" class="card-img-top" alt="..."><div class="card-body"> <h5 class="card-title">' + element.title + '</h5><p class="card-text"></p><div class="blog-button"><a class="blog-btn news-'+counter+'" href="javascript:blogDetail(\'' + element.uuid + '\')">Oku</a></div></div></div>';
                             } else {
-                                carouselHtml += '</div></div><div class="x"><div class="cards-wrapper"><div class="card"><img src="https://aybu.edu.tr/GetFile?id=Upload\2c9d5947-242a-4843-991b-e1fae77b5041.jpg" class="card-img-top" alt="..."><div class="card-body"><h5 class="card-title">' + element.title + '</h5><p class="card-text"></p><a href="#" class="btn btn-primary">Git</a></div></div>';
+                                carouselHtml += '</div></div><div class="x"><div class="cards-wrapper"><div class="card mobilex" style="width: 33%"><img style="height:17em!important;" src="' + element.image + '" class="card-img-top" alt="..."><div class="card-body"><h5 class="card-title">' + element.title + '</h5><p class="card-text"></p><div class="blog-button"><a class="blog-btn" href="javascript:blogDetail(\'' + element.uuid + '\')">Oku</a></div></div></div>';
 
                             }
 
 
                         } else {
-                            carouselHtml += '<div class="card d-none d-md-block"><img src="https://aybu.edu.tr/GetFile?id=Upload\2c9d5947-242a-4843-991b-e1fae77b5041.jpg" class="card-img-top" alt="..."> <div class="card-body"> <h5 class="card-title">' + element.title + '</h5> <p class="card-text"></p> <a href="#" class="btn btn-primary">Git</a> </div> </div>';
+                            carouselHtml += '<div class="card d-none d-md-block mobilex" style="width: 33%"><img style="height:17em!important;" src="' + element.image + '" class="card-img-top" alt="..."> <div class="card-body"> <h5 class="card-title">' + element.title + '</h5> <p class="card-text"></p><div class="blog-button"><a class="blog-btn" href="javascript:blogDetail(\'' + element.uuid + '\')">Oku</a></div> </div> </div>';
 
 
                         }
+
+
+
 
                         counter = counter + 1;
 
@@ -1045,7 +1113,7 @@
                     $('.your-class').html(carouselHtml);
                     $('.your-class').slick({
                         infinite: true,
-
+                        dots: true,
                         arrows: true,
                     });
 
